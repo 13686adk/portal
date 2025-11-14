@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Results - Admin Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+        }
+
+        #sidebar-container {
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            background-color: #fff;
+            z-index: 1000;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        #header {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .content-wrapper {
+            padding: 2rem;
+            max-width: 1400px;
+        }
+
+        /* Page Header */
+        .page-header-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: #0066cc;
+        }
+
+        .page-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .page-title p {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #e8f4f8;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .stat-info h3 {
+            font-size: 0.75rem;
+            color: #6c757d;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .stat-info .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .stat-icon {
+            color: #0066cc;
+        }
+
+        /* Question Results Section */
+        .results-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .results-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .view-btn {
+            background: #2c5f8d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .view-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Question Item */
+        .question-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-text {
+            font-size: 0.9rem;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Vote Bar */
+        .vote-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .vote-label {
+            font-size: 0.875rem;
+            color: #6c757d;
+            min-width: 200px;
+        }
+
+        .vote-bar-container {
+            flex: 1;
+            height: 32px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            margin: 0 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vote-bar {
+            height: 100%;
+            background: #7fb3d5;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        .vote-count {
+            font-size: 0.875rem;
+            color: #1a1a1a;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            #sidebar-container {
+                transform: translateX(-100%);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vote-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .vote-label {
+                margin-bottom: 0.5rem;
+            }
+
+            .vote-bar-container {
+                width: 100%;
+                margin: 0 0 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header-section">
+                <button class="back-btn" onclick="window.history.back()">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <div class="page-title">
+                    <h1>Results</h1>
+                    <p>Gather feedback on the mentoring experience</p>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Total Sent</h3>
+                        <div class="value">150</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Responses</h3>
+                        <div class="value">45</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Completion Rate</h3>
+                        <div class="value">30%</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Avg Time</h3>
+                        <div class="value">8m</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Results Section -->
+            <div class="results-section">
+                <div class="results-header">
+                    <h2>What could your mentor improve on?</h2>
+                    <button class="view-btn">View</button>
+                </div>
+
+                <!-- Question Results -->
+                <div class="question-results">
+                    <div class="question-item">
+                        <div class="vote-item">
+                            <div class="vote-label">Was himself/ check-ins out would be helpful</div>
+                            <div class="vote-bar-container">
+                                <div class="vote-bar" style="width: 20%;"></div>
+                            </div>
+                            <div class="vote-count">20 Votes</div>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="vote-item">
+                            <div class="vote-label">Better communication about expectations</div>
+                            <div class="vote-bar-container">
+                                <div class="vote-bar" style="width: 20%;"></div>
+                            </div>
+                            <div class="vote-count">20 Votes</div>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="vote-item">
+                            <div class="vote-label">More structured guidance on projects</div>
+                            <div class="vote-bar-container">
+                                <div class="vote-bar" style="width: 20%;"></div>
+                            </div>
+                            <div class="vote-count">20 Votes</div>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="vote-item">
+                            <div class="vote-label">Could provide more resources</div>
+                            <div class="vote-bar-container">
+                                <div class="vote-bar" style="width: 20%;"></div>
+                            </div>
+                            <div class="vote-count">20 Votes</div>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="vote-item">
+                            <div class="vote-label">Nothing, very satisfied</div>
+                            <div class="vote-bar-container">
+                                <div class="vote-bar" style="width: 20%;"></div>
+                            </div>
+                            <div class="vote-count">20 Votes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="header.js"></script>
+    <script src="nav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!--    <script>
+        // Animate vote bars on page load
+        window.addEventListener('load', function() {
+            const voteBars = document.querySelectorAll('.vote-bar');
+            voteBars.forEach((bar, index) => {
+                setTimeout(() => {
+                    bar.style.width = bar.style.width;
+                }, index * 100);
+            });
+        });
+
+        // View button functionality
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Add your view detailed results logic here
+                alert('Opening detailed results view...');
+            });
+        });
+    </script>
+    -->
+
+</body>
+</html>

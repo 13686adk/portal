@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam's Design Community</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Content wrapper for your sidebar and header */
+        .page-content {
+            background-color: #fff;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Left Sidebar for Forums */
+        .left-sidebar {
+            width: 200px;
+            background-color: #fff;
+            border-right: 1px solid #e5e5e5;
+            padding: 15px;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-title {
+            font-weight: 500;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .plus-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        .forum-section {
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+
+        .forum-section i {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .forum-title {
+            font-weight: 500;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item-custom {
+            padding: 6px 0 6px 17px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .nav-item-custom:hover {
+            color: #333;
+        }
+
+        .notification-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #dc3545;
+            border-radius: 50%;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            background-color: #fafafa;
+            border-right: 1px solid #e5e5e5;
+        }
+
+        .content-header {
+            padding: 15px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .content-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .search-section {
+            padding: 15px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 14px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 6px 10px 6px 32px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            font-size: 13px;
+            background-color: #fafafa;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #999;
+            background-color: #fff;
+        }
+
+        .messages-container {
+            padding: 15px 20px;
+        }
+
+        .message-item {
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .message-info {
+            flex: 1;
+        }
+
+        .message-author {
+            font-weight: 600;
+            font-size: 13px;
+            color: #333;
+            margin-right: 6px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .message-content {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+            margin-left: 46px;
+            margin-bottom: 8px;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 12px;
+            margin-left: 46px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .message-actions i {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .message-actions i:hover {
+            color: #666;
+        }
+
+        /* Right Sidebar for Members */
+        .right-sidebar {
+            width: 180px;
+            background-color: #fff;
+            padding: 15px;
+        }
+
+        .members-section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .section-header i {
+            font-size: 10px;
+        }
+
+        .member-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .member-item {
+            padding: 5px 0;
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .member-item:hover {
+            color: #0d6efd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+        
+        <!-- This is the content section that will fit into your sidebar and header layout -->
+        <div class="page-content">
+
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <div class="sidebar-header">
+                    <span class="sidebar-title">Forums</span>
+                    <button class="plus-btn">+</button>
+                </div>
+
+                <div class="forum-section">
+                    <i class="bi bi-chevron-down"></i>
+                    <span class="forum-title">Sam's Design Community</span>
+                </div>
+
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-item-custom">Announcement</a></li>
+                    <li><a href="#" class="nav-item-custom">
+                        #Articles
+                        <span class="notification-dot"></span>
+                    </a></li>
+                    <li><a href="#" class="nav-item-custom">
+                        #Question/answers
+                        <span class="notification-dot"></span>
+                    </a></li>
+                    <li><a href="#" class="nav-item-custom">#General</a></li>
+                    <li><a href="#" class="nav-item-custom">#Cruise</a></li>
+                    <li><a href="#" class="nav-item-custom">⚡team support</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="content-header mt-2">
+                    <h4 class="content-title">Sam's Design Community</h4>
+                </div>
+
+                <div class="search-section">
+                    <div class="search-wrapper">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="">
+                    </div>
+                </div>
+
+                <div class="messages-container">
+                    <!-- Message 1 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="avatar">DG</div>
+                            <div class="message-info">
+                                <div>
+                                    <span class="message-author">David George</span>
+                                    <span class="message-time">14/5/2025 02:44pm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            Hello @everyone<br><br>
+                            This is to inform you that the error 401 has been resolved.<br><br>
+                            You can now submit without any restrictions.<br><br>
+                            <span style="color: #999; font-style: italic;">Sorry for the inconveniences caused.</span>
+                        </div>
+                        <div class="message-actions">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-share"></i>
+                        </div>
+                    </div>
+
+                    <!-- Message 2 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                DG</div>
+                            <div class="message-info">
+                                <div>
+                                    <span class="message-author">David George</span>
+                                    <span class="message-time">14/5/2025 02:44pm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            Hello @everyone. This is to inform you that the error 401 has been resolved.You can now submit without any restrictions.
+                        </div>
+                        <div class="message-actions">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-share"></i>
+                        </div>
+                    </div>
+
+                    <!-- Message 3 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">FB
+                            </div>
+                            <div class="message-info">
+                                <div>
+                                    <span class="message-author">Freidi Britt</span>
+                                    <span class="message-time">14/5/2025 03:46pm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            Thank you for resolving that we appreciate.
+                        </div>
+                        <div class="message-actions">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-share"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="right-sidebar">
+                <div class="members-section">
+                    <div class="section-header mt-2">
+                        <span>Mentors</span>
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="members-section">
+                    <div class="section-header">
+                        <span>Youngstars</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="member-list">
+                        <li class="member-item">Sam's Design Community</li>
+                        <li class="member-item">Sam</li>
+                        <li class="member-item">Yusuf</li>
+                        <li class="member-item">Tunde</li>
+                        <li class="member-item">Chinedu</li>
+                        <li class="member-item">Frank</li>
+                        <li class="member-item">Solomon</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="header.js"></script>
+    <script src="nav.js"></script>
+</body>
+
+</html>

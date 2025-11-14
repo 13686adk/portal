@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+
+        <!-- Communities Management Content -->
+        <div class="container-fluid p-4"
+            style="background-color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;">
+
+            <!-- Header -->
+            <div class="mb-4">
+                <h4 class="fw-bold mb-1">Communities</h4>
+                <p class="text-muted mb-0" style="font-size: 14px;">Manage communities, monitor activity, and moderate
+                    content</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs mb-3" id="communityTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-communities-tab" data-bs-toggle="tab"
+                        data-bs-target="#all-communities" type="button" role="tab" aria-controls="all-communities"
+                        aria-selected="true">All Communities</button>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="inactive-tab" data-bs-toggle="tab" data-bs-target="#inactive"
+                        type="button" role="tab" aria-controls="inactive" aria-selected="false">Inactive</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="flagged-tab" data-bs-toggle="tab" data-bs-target="#flagged"
+                        type="button" role="tab" aria-controls="flagged" aria-selected="false">Flagged</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="closed-tab" data-bs-toggle="tab" data-bs-target="#closed" type="button"
+                        role="tab" aria-controls="closed" aria-selected="false">Closed</button>
+                </li> -->
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="communityTabContent">
+
+                <!-- All Communities Tab -->
+                <div class="tab-pane fade show active" id="all-communities" role="tabpanel"
+                    aria-labelledby="all-communities-tab">
+
+                    <!-- Community 1: Web Development Hub -->
+                    <div class="community-card" id="communityContainer">
+                        <!-- <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Web Development Hub
+                                    <span class="badge-status badge-active">Active</span>
+                                </h5>
+                                <p class="community-description mb-2">A community for web developers to share knowledge
+                                    and collaborate</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Dr. James Wilson</span>
+                                    <span><strong>Category:</strong> Technology</span>
+                                    <span><strong>Created:</strong> 6/15/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 245 members</span>
+                                    <span class="stat-item">💬 1073 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <a href="comments.html" class="btn btn-primary"
+                                    style="background-color: #45739B; border: none;">
+                                    Enter
+                                </a>
+
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <!-- Community 2: Career Growth Network -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Career Growth Network
+                                    <span class="badge-status badge-active">Active</span>
+                                </h5>
+                                <p class="community-description mb-2">Connect with professionals and grow your career
+                                </p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Admin Team</span>
+                                    <span><strong>Category:</strong> Career</span>
+                                    <span><strong>Created:</strong> 5/11/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 812 members</span>
+                                    <span class="stat-item">💬 2456 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Community 3: Data Science Enthusiasts -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Data Science Enthusiasts
+                                    <span class="badge-status badge-active">Active</span>
+                                </h5>
+                                <p class="community-description mb-2">Discuss data science, ML, and AI topics</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Michael Chen</span>
+                                    <span><strong>Category:</strong> Data Science</span>
+                                    <span><strong>Created:</strong> 7/10/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 189 members</span>
+                                    <span class="stat-item">💬 876 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Community 4: Design Critique Circle -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Design Critique Circle
+                                    <span class="badge-status badge-flagged">Flagged</span>
+                                </h5>
+                                <p class="community-description mb-2">Share and critique design work</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Emily Rodriguez</span>
+                                    <span><strong>Category:</strong> Design</span>
+                                    <span><strong>Created:</strong> 4/10/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 156 members</span>
+                                    <span class="stat-item">💬 433 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Community 5: Beginner Coders -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Beginner Coders
+                                    <span class="badge-status badge-closed">Closed</span>
+                                </h5>
+                                <p class="community-description mb-2">A supportive space for coding beginners</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Alex Thompson</span>
+                                    <span><strong>Category:</strong> Programming</span>
+                                    <span><strong>Created:</strong> 9/15/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 67 members</span>
+                                    <span class="stat-item">💬 345 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Community 6: Beginner Coders (Duplicate) -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Beginner Coders
+                                    <span class="badge-status badge-closed">Block</span>
+                                </h5>
+                                <p class="community-description mb-2">A supportive space for coding beginners</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Alex Thompson</span>
+                                    <span><strong>Category:</strong> Programming</span>
+                                    <span><strong>Created:</strong> 9/15/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 67 members</span>
+                                    <span class="stat-item">💬 345 posts</span>
+                                </div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn-open">Open</button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+
+                <!-- Inactive Tab -->
+                <div class="tab-pane fade" id="inactive" role="tabpanel" aria-labelledby="inactive-tab">
+
+                    <!-- Community: Python Learning Circle -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Python Learning Circle
+                                    <span class="badge-status badge-closed">Inactive</span>
+                                </h5>
+                                <p class="community-description mb-2">Learn Python together with peers</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Lisa Anderson</span>
+                                    <span><strong>Category:</strong> Programming</span>
+                                    <span><strong>Created:</strong> 3/20/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 45 members</span>
+                                    <span class="stat-item">💬 123 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Community: Mobile Dev Meetup -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Mobile Dev Meetup
+                                    <span class="badge-status badge-closed">Inactive</span>
+                                </h5>
+                                <p class="community-description mb-2">iOS and Android development discussions</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Sophie Martinez</span>
+                                    <span><strong>Category:</strong> Mobile Development</span>
+                                    <span><strong>Created:</strong> 2/14/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 32 members</span>
+                                    <span class="stat-item">💬 89 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+
+                <!-- Flagged Tab -->
+                <div class="tab-pane fade" id="flagged" role="tabpanel" aria-labelledby="flagged-tab">
+
+                    <!-- Community: Design Critique Circle -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Design Critique Circle
+                                    <span class="badge-status badge-flagged">Flagged</span>
+                                </h5>
+                                <p class="community-description mb-2">Share and critique design work</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Emily Rodriguez</span>
+                                    <span><strong>Category:</strong> Design</span>
+                                    <span><strong>Created:</strong> 4/10/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 156 members</span>
+                                    <span class="stat-item">💬 433 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Community: Crypto Trading Tips -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Crypto Trading Tips
+                                    <span class="badge-status badge-flagged">Flagged</span>
+                                </h5>
+                                <p class="community-description mb-2">Share cryptocurrency trading strategies</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> David Lee</span>
+                                    <span><strong>Category:</strong> Finance</span>
+                                    <span><strong>Created:</strong> 8/5/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 234 members</span>
+                                    <span class="stat-item">💬 1567 posts</span>
+                                </div>
+                            </div>
+                           
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+
+                <!-- Closed Tab -->
+                <div class="tab-pane fade" id="closed" role="tabpanel" aria-labelledby="closed-tab">
+
+                    <!-- Community: Beginner Coders -->
+                    <!-- <div class="community-card"> -->
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Beginner Coders
+                                    <span class="badge-status badge-closed">Closed</span>
+                                </h5>
+                                <p class="community-description mb-2">A supportive space for coding beginners</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Alex Thompson</span>
+                                    <span><strong>Category:</strong> Programming</span>
+                                    <span><strong>Created:</strong> 9/15/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 67 members</span>
+                                    <span class="stat-item">💬 345 posts</span>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons d-flex justify-content-end gap-2"
+                                style="position: absolute; bottom: 20px; right: 20px;">
+                                <button class="btn btn-primary" style="background-color: #45739B; border: none;">
+                                    Enter
+                                </button>
+                                <button class="btn btn-danger" style="border: none;">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community: Old Tech Forums -->
+                    <!-- <div class="community-card">
+                        <div class="community-header">
+                            <div style="flex: 1;">
+                                <h5 class="community-title">
+                                    Old Tech Forums
+                                    <span class="badge-status badge-closed">Closed</span>
+                                </h5>
+                                <p class="community-description mb-2">Legacy technology discussions</p>
+                                <div class="community-meta">
+                                    <span><strong>Creator:</strong> Robert Chang</span>
+                                    <span><strong>Category:</strong> Technology</span>
+                                    <span><strong>Created:</strong> 1/10/2024</span>
+                                </div>
+                                <div class="community-stats">
+                                    <span class="stat-item">👥 23 members</span>
+                                    <span class="stat-item">💬 56 posts</span>
+                                </div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn-open">Open</button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+
+            </div>
+        </div>
+    
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="header.js"></script>
+    <script src="nav.js"></script>
+    <script src="js/communities.js"></script>
+</body>
+
+</html>

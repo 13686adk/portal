@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Header -->
+    <div id="header"></div>
+    <!-- Header -->
+    <div class="mb-4" style="margin-left: 25px;">
+      <h4 class="mb-0 mt-5" style="font-weight: 700; color: #333;">Add Courses</h4>
+    </div>
+
+
+    <!-- Tabs Navigation -->
+    <div class="container py-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-14 col-xl-12">
+          <div class="card mb-4 border-0 " style="border-radius: 8px; background-color: white;">
+            <div class="card-body p-0">
+              <ul class="nav nav-tabs justify-content-around border-0" id="courseTabs" role="tablist"
+                style="padding: 15px 0; background-color: #ffffff;">
+
+                <!-- Basic Information -->
+                <li class="nav-item flex-fill text-center" role="presentation">
+                  <button class="nav-link active d-flex align-items-center justify-content-center w-100 tab-btn"
+                    id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab"
+                    aria-controls="basic" aria-selected="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e5a8e" stroke-width="2"
+                      style="margin-right: 8px;">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    <span>Basic Information</span>
+                  </button>
+                </li>
+
+                <!-- Curriculum -->
+                <li class="nav-item flex-fill text-center" role="presentation">
+                  <button class="nav-link d-flex align-items-center justify-content-center w-100 tab-btn"
+                    id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab"
+                    aria-controls="curriculum" aria-selected="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6c757d" stroke-width="2"
+                      style="margin-right: 8px;">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>Curriculum</span>
+                  </button>
+                </li>
+
+                <!-- Assessment -->
+                <li class="nav-item flex-fill text-center" role="presentation">
+                  <button class="nav-link d-flex align-items-center justify-content-center w-100 tab-btn"
+                    id="assessment-tab" data-bs-toggle="tab" data-bs-target="#assessment" type="button" role="tab"
+                    aria-controls="assessment" aria-selected="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6c757d" stroke-width="2"
+                      style="margin-right: 8px;">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    <span>Assessment</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tabs Content -->
+          <div class="tab-content" id="courseTabsContent">
+            <!-- Basic Information Tab -->
+            <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+              <div class="card shadow-sm border-0" style="border-radius: 8px; background-color: #e6f5ff;">
+                <div class="card-body" style="padding: 30px;">
+                  <h5 class="mb-4 fw-semibold text-dark">Basic Information</h5>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-medium" style="font-size: 14px;">Title</label>
+                    <input type="text" class="form-control" placeholder="Your course title"
+                      style="border: 1px solid #d0d0d0; border-radius: 6px; padding: 10px; font-size: 14px;">
+                    <div class="text-end mt-1">
+                      <small class="text-muted" style="font-size: 12px;">0/60</small>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <label class="form-label fw-medium" style="font-size: 14px;">Course Category</label>
+                      <select class="form-select"
+                        style="border: 1px solid #d0d0d0; border-radius: 6px; padding: 10px; font-size: 14px;">
+                        <option selected>Select...</option>
+                        <option value="1">Web Development</option>
+                        <option value="2">Data Science</option>
+                        <option value="3">Design</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <label class="form-label fw-medium" style="font-size: 14px;">Course Language</label>
+                      <select class="form-select"
+                        style="border: 1px solid #d0d0d0; border-radius: 6px; padding: 10px; font-size: 14px;">
+                        <option selected>Select...</option>
+                        <option value="1">English</option>
+                        <option value="2">Spanish</option>
+                        <option value="3">French</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <label class="form-label fw-medium" style="font-size: 14px;">Course Level</label>
+                      <select class="form-select"
+                        style="border: 1px solid #d0d0d0; border-radius: 6px; padding: 10px; font-size: 14px;">
+                        <option selected>Select...</option>
+                        <option value="1">Beginner</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Advanced</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <label class="form-label fw-medium" style="font-size: 14px;">Duration</label>
+                      <div class="d-flex align-items-center gap-2">
+                        <input type="text" class="form-control" placeholder="Course duration"
+                          style="border: 1px solid #d0d0d0; border-radius: 6px; padding: 10px; font-size: 14px;">
+                        <select class="form-select"
+                          style="border: 1px solid #d0d0d0; border-radius: 6px; padding: 10px; font-size: 14px; max-width: 120px;">
+                          <option selected>Day</option>
+                          <option value="1">Week</option>
+                          <option value="2">Month</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-between mt-4">
+                    <button class="btn btn-outline-secondary px-4 fw-medium">Cancel</button>
+                    <button class="btn btn-primary px-5 fw-medium"
+                      style="background-color: #1e5a8e; border: none;">Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Curriculum Tab -->
+            <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
+              <div class="card shadow-sm border-0" style="border-radius: 8px; background-color: #e6f5ff;">
+                <div class="card-body p-4">
+                  <h6 class="fw-bold mb-3 d-flex align-items-center" style="color: #1e5a8e;">
+                    <i class="bi bi-journal-text me-2"></i> Curriculum
+                  </h6>
+
+                  <div class="mb-4 p-4 rounded" style="background-color: white; border: 1px solid white;">
+                    <h6 class="fw-bold mb-3 d-flex align-items-center" style="color: #333;">
+                      <i class="bi bi-book me-2" style="color: #1e5a8e;"></i> Course Title
+                    </h6>
+
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Lecture name</label>
+                      <input type="text" class="form-control" placeholder="Type lecture name"
+                        style="background-color: #fff;">
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Upload video URL</label>
+                      <input type="text" class="form-control" placeholder="Copy and paste here"
+                        style="background-color: #fff;">
+                    </div>
+                    <button class="btn btn-outline-primary w-100 mb-4">Add</button>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <button class="btn btn-light px-4">Previous</button>
+                      <button class="btn btn-primary px-4"
+                        style="background-color: #1e5a8e; border: none;">Next</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Assessment Tab -->
+            <div class="tab-pane fade" id="assessment" role="tabpanel" aria-labelledby="assessment-tab">
+              <div class="card shadow-sm border-0" style="border-radius: 8px; background-color: #e6f5ff;">
+                <div class="card-body">
+                  <div class="container-fluid py-4" style="background:#e6f5ff;">
+                    <div class="mx-auto rounded-3 p-4 shadow-sm" style="max-width:950px; background:#e6f5ff;">
+                      <h6 class="fw-semibold mb-3">Assessment</h6>
+
+                      <div class="border rounded p-3" style="background:#e6f5ff;">
+                        <!-- Header -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                          <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-file-earmark-text"></i>
+                            <span class="fw-semibold small">Assessment Questions</span>
+                          </div>
+                          <button class="btn btn-sm btn-light border rounded-circle">+</button>
+                        </div>
+
+                        <!-- Question Input -->
+                        <div class="mb-3">
+                          <label class="form-label fw-semibold" style="font-size: 14px;">Question</label>
+                          <textarea class="form-control" rows="4" placeholder="Type your question here..."
+                            style="resize: none; font-size: 15px; padding: 12px 14px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+                        </div>
+
+                        <!-- Editor Toolbar -->
+                        <div class="mb-3 d-flex gap-2">
+                          <button class="btn btn-sm btn-light border me-2 fw-bold">B</button>
+                          <button class="btn btn-sm btn-light border me-2 fst-italic">I</button>
+                          <button class="btn btn-sm btn-light border me-2 text-decoration-underline">U</button>
+                          <button class="btn btn-sm btn-light border me-2">•</button>
+                          <button class="btn btn-sm btn-light border me-2">🔗</button>
+                          <span class="ms-auto small text-muted">1.</span>
+                        </div>
+
+                        <!-- Add Button -->
+                        <div class="text-center">
+                          <button class="btn btn-outline-secondary btn-sm w-25">Add</button>
+                        </div>
+                      </div>
+
+                      <!-- Footer -->
+                      <div class="d-flex justify-content-between mt-3">
+                        <button class="btn btn-light btn-sm px-4">Previous</button>
+                        <button class="btn btn-primary btn-sm px-4" style="background:#004d75;" id="publishButton">Publish</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="header.js"></script>
+  <script src="nav.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="js/publish.js"></script>
+</body>
+
+</html>

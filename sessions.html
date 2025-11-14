@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+
+        <div class="container-fluid p-4"
+            style="background-color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;">
+
+            <!-- Header -->
+            <div class="mb-4">
+                <h4 class="fw-bold mb-1">Sessions Management</h4>
+                <p class="text-muted mb-0" style="font-size: 14px;">Monitor and manage all mentorship sessions</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs mb-3" id="sessionTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all"
+                        type="button" role="tab" aria-controls="all" aria-selected="true">All Sessions</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="scheduled-tab" data-bs-toggle="tab" data-bs-target="#scheduled"
+                        type="button" role="tab" aria-controls="scheduled" aria-selected="false">Scheduled</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="live-tab" data-bs-toggle="tab" data-bs-target="#live" type="button"
+                        role="tab" aria-controls="live" aria-selected="false">Live</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="flagged-tab" data-bs-toggle="tab" data-bs-target="#flagged"
+                        type="button" role="tab" aria-controls="flagged" aria-selected="false">Flagged</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="abandoned-tab" data-bs-toggle="tab" data-bs-target="#abandoned"
+                        type="button" role="tab" aria-controls="abandoned" aria-selected="false">Abandoned</button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="sessionsContainer" >
+
+                <!-- All Sessions Tab -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <!-- Session 1: React Hooks Deep Dive -->
+                    <!-- <div class="session-card">
+                        <div class="menu-dots">⋮</div>
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">React Hooks Deep Dive <span
+                                        class="badge-status badge-live">LIVE</span></h5>
+                                <p class="session-topic mb-0">Topic: Web Development</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Dr. James Wilson</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Alex Thompson</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="session-meta">
+                                Scheduled: Jan 16, 2:00 PM&nbsp;&nbsp;&nbsp;Duration: 60 min
+                            </div>
+                            <button class="btn-enter" onclick="window.location.href='reviewsessions.html'">
+  Enter
+</button>
+
+                        </div>
+                    </div> -->
+
+                    <!-- Session 2: Career Guidance Session -->
+                    <!-- <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">Career Guidance Session <span
+                                        class="badge-status badge-completed">Completed</span></h5>
+                                <p class="session-topic mb-0">Topic: Career Development</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Lisa Anderson</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Sophie Martinez</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 16, 10:00 AM&nbsp;&nbsp;&nbsp;Duration: 45 min
+                        </div>
+                    </div> -->
+
+                    <!-- Session 3: Python Data Analysis -->
+                    <!-- <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">Python Data Analysis <span
+                                        class="badge-status badge-cancelled">Cancelled</span></h5>
+                                <p class="session-topic mb-0">Topic: Data Science</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Michael Chen</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">David Lee</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="session-meta">
+                                Scheduled: Jan 15, 4:00 PM&nbsp;&nbsp;&nbsp;Duration: 60 min
+                            </div>
+                            <button class="btn-review">View Review</button>
+                        </div>
+                    </div> -->
+
+                    <!-- Session 4: UI Design Review -->
+                    <!-- <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">UI Design Review <span
+                                        class="badge-status badge-abandoned">Abandoned</span></h5>
+                                <p class="session-topic mb-0">Topic: Design</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Emily Rodriguez</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Emma Brown</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 14, 1:00 PM&nbsp;&nbsp;&nbsp;Duration: 30 min
+                        </div>
+                    </div> -->
+
+                    <!-- Session 5: JavaScript Fundamentals -->
+                    <!-- <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">JavaScript Fundamentals <span
+                                        class="badge-status badge-completed">Completed</span></h5>
+                                <p class="session-topic mb-0">Topic: Programming</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Dr. James Wilson</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Alex Thompson</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="session-meta">
+                                Scheduled: Jan 14, 3:00 PM&nbsp;&nbsp;&nbsp;Duration: 60 min
+                            </div>
+                            <button class="btn-review">View Review</button>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Scheduled Tab -->
+                <div class="tab-pane fade" id="scheduled" role="tabpanel" aria-labelledby="scheduled-tab">
+                    <!-- Session: Advanced CSS Techniques -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">Advanced CSS Techniques <span
+                                        class="badge-status badge-scheduled">Scheduled</span></h5>
+                                <p class="session-topic mb-0">Topic: Web Development</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Sarah Johnson</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Mark Stevens</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 17, 11:00 AM&nbsp;&nbsp;&nbsp;Duration: 45 min
+                        </div>
+                    </div>
+
+                    <!-- Session: Database Optimization -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">Database Optimization <span
+                                        class="badge-status badge-scheduled">Scheduled</span></h5>
+                                <p class="session-topic mb-0">Topic: Backend Development</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Robert Chang</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Jessica White</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 18, 3:00 PM&nbsp;&nbsp;&nbsp;Duration: 90 min
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Tab -->
+                <div class="tab-pane fade" id="live" role="tabpanel" aria-labelledby="live-tab">
+                    <!-- Session: React Hooks Deep Dive -->
+                    <div class="session-card">
+                        <div class="menu-dots">⋮</div>
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">React Hooks Deep Dive <span
+                                        class="badge-status badge-live">LIVE</span></h5>
+                                <p class="session-topic mb-0">Topic: Web Development</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Dr. James Wilson</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Alex Thompson</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="session-meta">
+                                Scheduled: Jan 16, 2:00 PM&nbsp;&nbsp;&nbsp;Duration: 60 min
+                            </div>
+                            <button class="btn-enter">Enter</button>
+                        </div>
+                    </div>
+
+                    <!-- Session: Mobile App Development -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">Mobile App Development <span
+                                        class="badge-status badge-live">LIVE</span></h5>
+                                <p class="session-topic mb-0">Topic: Mobile Development</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Patricia Lee</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Kevin Brown</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="session-meta">
+                                Scheduled: Jan 16, 2:30 PM&nbsp;&nbsp;&nbsp;Duration: 60 min
+                            </div>
+                            <button class="btn-enter">Enter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flagged Tab -->
+                <div class="tab-pane fade" id="flagged" role="tabpanel" aria-labelledby="flagged-tab">
+                    <!-- Session: Cloud Architecture Review -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">Cloud Architecture Review <span
+                                        class="badge-status badge-flagged">Flagged</span></h5>
+                                <p class="session-topic mb-0">Topic: Cloud Computing</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Thomas Miller</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Rachel Green</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 15, 9:00 AM&nbsp;&nbsp;&nbsp;Duration: 60 min
+                        </div>
+                    </div>
+
+                    <!-- Session: Security Best Practices -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">Security Best Practices <span
+                                        class="badge-status badge-flagged">Flagged</span></h5>
+                                <p class="session-topic mb-0">Topic: Cybersecurity</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Daniel Kim</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Amanda Scott</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 15, 5:00 PM&nbsp;&nbsp;&nbsp;Duration: 45 min
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abandoned Tab -->
+                <div class="tab-pane fade" id="abandoned" role="tabpanel" aria-labelledby="abandoned-tab">
+                    <!-- Session: UI Design Review -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">UI Design Review <span
+                                        class="badge-status badge-abandoned">Abandoned</span></h5>
+                                <p class="session-topic mb-0">Topic: Design</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Emily Rodriguez</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Emma Brown</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 14, 1:00 PM&nbsp;&nbsp;&nbsp;Duration: 30 min
+                        </div>
+                    </div>
+
+                    <!-- Session: API Integration Workshop -->
+                    <div class="session-card">
+                        <div class="session-header">
+                            <div>
+                                <h5 class="session-title">API Integration Workshop <span
+                                        class="badge-status badge-abandoned">Abandoned</span></h5>
+                                <p class="session-topic mb-0">Topic: Backend Development</p>
+                            </div>
+                        </div>
+                        <div class="mentor-info">
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentor</span>
+                                <span class="mentor-name">Christopher Davis</span>
+                            </div>
+                            <div class="mentor-item">
+                                <span class="mentor-label">Mentee</span>
+                                <span class="mentor-name">Michelle Taylor</span>
+                            </div>
+                        </div>
+                        <div class="session-meta">
+                            Scheduled: Jan 13, 4:00 PM&nbsp;&nbsp;&nbsp;Duration: 75 min
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="header.js"></script>
+    <script src="nav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/sessions.js"></script>
+</body>
+
+</html>

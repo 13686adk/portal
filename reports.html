@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+
+        <div class="container-fluid p-4"
+            style="background-color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;">
+            <!-- Header -->
+            <div class="mb-4">
+                <h4 class="fw-bold mb-1">Reports</h4>
+                <p class="text-muted mb-0" style="font-size: 14px;">Review and manage reports from mentors and mentees
+                </p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs mb-3" id="reportTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-reports-tab" data-bs-toggle="tab"
+                        data-bs-target="#all-reports" type="button" role="tab" aria-controls="all-reports"
+                        aria-selected="true">All Reports</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="mentor-reports-tab" data-bs-toggle="tab"
+                        data-bs-target="#mentor-reports" type="button" role="tab" aria-controls="mentor-reports"
+                        aria-selected="false">Mentor Reports</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="mentee-reports-tab" data-bs-toggle="tab"
+                        data-bs-target="#mentee-reports" type="button" role="tab" aria-controls="mentee-reports"
+                        aria-selected="false">Mentee Reports</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="community-reports-tab" data-bs-toggle="tab"
+                        data-bs-target="#community-reports" type="button" role="tab" aria-controls="community-reports"
+                        aria-selected="false">Community Reports</button>
+                </li>
+            </ul>
+
+            <!-- Search Box -->
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search reports..." class="form-control">
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="reportTabContent">
+
+                <!-- All Reports Tab -->
+                <div class="tab-pane fade show active" id="all-reports" role="tabpanel"
+                    aria-labelledby="all-reports-tab">
+
+                    <!-- Report 1: Inappropriate Behavior -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Inappropriate Behavior
+                                    <span class="badge text-capitalize px-3 py-2"
+                                        style="background-color: #0b4f86; color: #fff; border-radius: 6px; font-size: 12px;">
+                                        Pending
+                                    </span>
+                                </h5>
+                                <p class="report-meta mb-0">Alex Thompson (mentee) reported Robert Kim (Mentor)</p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Mentor was unprofessional during our session and made
+                            inappropriate comments.</p>
+                        <p class="report-time mb-0">270 days ago</p>
+                    </div>
+
+                    <!-- Report 2: Spam Content -->
+                    <div class="report-card resolved">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Spam Content
+                                    <span class="badge-status badge-resolved">Resolved</span>
+                                </h5>
+                                <p class="report-meta mb-0">Dr. James Wilson (mentor) reported Design Critique Circle
+                                    (Community)</p>
+                            </div>
+                        </div>
+                        <p class="report-description">Community has multiple spam posts promoting external services.</p>
+                        <p class="report-time mb-0">278 days ago</p>
+                    </div>
+
+                    <!-- Report 3: No-Show -->
+                    <div class="report-card resolved">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    No-Show
+                                    <span class="badge-status badge-resolved">Resolved</span>
+                                </h5>
+                                <p class="report-meta mb-0">Sophie Martinez (mentee) reported Python Data Analysis
+                                    Session</p>
+                            </div>
+                        </div>
+                        <p class="report-description">Mentor did not show up for the scheduled session.</p>
+                        <p class="report-time mb-0">281 days ago</p>
+                    </div>
+
+                    <!-- Report 4: Harassment -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Harassment
+                                    <span class="badge text-capitalize px-3 py-2"
+                                        style="background-color: #0b4f86; color: #fff; border-radius: 6px; font-size: 12px;">
+                                        Pending
+                                    </span>
+
+                                </h5>
+                                <p class="report-meta mb-0">Lisa Anderson (mentor) reported David Lee (Mentee)</p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Mentee has been sending inappropriate messages outside of
+                            platform.</p>
+                        <p class="report-time mb-0">277 days ago</p>
+                    </div>
+
+                    <!-- Report 5: Misleading Information -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Misleading Information
+                                    <span class="badge text-capitalize px-3 py-2"
+                                        style="background-color: #0b4f86; color: #fff; border-radius: 6px; font-size: 12px;">
+                                        Pending
+                                    </span>
+                                </h5>
+                                <p class="report-meta mb-0">Emma Brown (mentee) reported Blockchain Basics Course</p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Course contains outdated and potentially misleading information.
+                        </p>
+                        <p class="report-time mb-0">282 days ago</p>
+                    </div>
+
+                </div>
+                <!-- Mentor Reports Tab -->
+                <div class="tab-pane fade" id="mentor-reports" role="tabpanel" aria-labelledby="mentor-reports-tab">
+
+                    <!-- Report 1: Inappropriate Behavior -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Inappropriate Behavior
+                                    <span class="badge text-capitalize px-3 py-2"
+                                        style="background-color: #0b4f86; color: #fff; border-radius: 6px; font-size: 12px;">
+                                        Pending
+                                    </span>
+                                </h5>
+                                <p class="report-meta mb-0">Alex Thompson (mentee) reported Robert Kim (Mentor)</p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Mentor was unprofessional during our session and made
+                            inappropriate comments.</p>
+                        <p class="report-time mb-0">270 days ago</p>
+                    </div>
+
+                    <!-- Report 2: Poor Communication -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Poor Communication
+                                    <span class="badge text-capitalize px-3 py-2"
+                                        style="background-color: #0b4f86; color: #fff; border-radius: 6px; font-size: 12px;">
+                                        Pending
+                                    </span>
+                                </h5>
+                                <p class="report-meta mb-0">Jessica White (mentee) reported Michael Chen (Mentor)</p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Mentor rarely responds to messages and cancels sessions
+                            frequently.</p>
+                        <p class="report-time mb-0">285 days ago</p>
+                    </div>
+
+                    <!-- Report 3: Lack of Expertise -->
+                    <div class="report-card resolved">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Lack of Expertise
+                                    <span class="badge-status badge-resolved">Resolved</span>
+                                </h5>
+                                <p class="report-meta mb-0">Mark Stevens (mentee) reported Sarah Johnson (Mentor)</p>
+                            </div>
+                        </div>
+                        <p class="report-description">Mentor does not have sufficient knowledge in the advertised area.
+                        </p>
+                        <p class="report-time mb-0">290 days ago</p>
+                    </div>
+
+                </div>
+
+                <!-- Mentee Reports Tab -->
+                <div class="tab-pane fade" id="mentee-reports" role="tabpanel" aria-labelledby="mentee-reports-tab">
+
+                    <!-- Report 1: Harassment -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Harassment
+                                    <span class="badge-status badge-flagged">Flagged</span>
+                                </h5>
+                                <p class="report-meta mb-0">Lisa Anderson (mentor) reported David Lee (Mentee)</p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Mentee has been sending inappropriate messages outside of
+                            platform.</p>
+                        <p class="report-time mb-0">277 days ago</p>
+                    </div>
+
+                    <!-- Report 2: Disrespectful Behavior -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Disrespectful Behavior
+                                    <span class="badge-status badge-flagged">Flagged</span>
+                                </h5>
+                                <p class="report-meta mb-0">Dr. James Wilson (mentor) reported Sophie Martinez (Mentee)
+                                </p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Mentee was rude and dismissive during our last three sessions.</p>
+                        <p class="report-time mb-0">283 days ago</p>
+                    </div>
+
+                    <!-- Report 3: No Commitment -->
+                    <div class="report-card resolved">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    No Commitment
+                                    <span class="badge-status badge-resolved">Resolved</span>
+                                </h5>
+                                <p class="report-meta mb-0">Emily Rodriguez (mentor) reported Kevin Brown (Mentee)</p>
+                            </div>
+                        </div>
+                        <p class="report-description">Mentee frequently misses sessions without prior notice.</p>
+                        <p class="report-time mb-0">288 days ago</p>
+                    </div>
+
+                </div>
+
+                <!-- Community Reports Tab -->
+                <div class="tab-pane fade" id="community-reports" role="tabpanel"
+                    aria-labelledby="community-reports-tab">
+
+                    <!-- Report 1: Spam Content -->
+                    <div class="report-card resolved">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Spam Content
+                                    <span class="badge-status badge-resolved">Resolved</span>
+                                </h5>
+                                <p class="report-meta mb-0">Dr. James Wilson (mentor) reported Design Critique Circle
+                                    (Community)</p>
+                            </div>
+                        </div>
+                        <p class="report-description">Community has multiple spam posts promoting external services.</p>
+                        <p class="report-time mb-0">278 days ago</p>
+                    </div>
+
+                    <!-- Report 2: Misleading Information -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Misleading Information
+                                    <span class="badge-status badge-flagged">Flagged</span>
+                                </h5>
+                                <p class="report-meta mb-0">Emma Brown (mentee) reported Blockchain Basics Course</p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Course contains outdated and potentially misleading information.
+                        </p>
+                        <p class="report-time mb-0">282 days ago</p>
+                    </div>
+
+                    <!-- Report 3: Inappropriate Content -->
+                    <div class="report-card flagged">
+                        <div class="report-header">
+                            <div>
+                                <h5 class="report-title">
+                                    Inappropriate Content
+                                    <span class="badge-status badge-flagged">Flagged</span>
+                                </h5>
+                                <p class="report-meta mb-0">Multiple users reported Web Development Forum (Community)
+                                </p>
+                            </div>
+                            <button class="btn-resolved">Resolved</button>
+                        </div>
+                        <p class="report-description">Forum contains offensive posts that violate community guidelines.
+                        </p>
+                        <p class="report-time mb-0">275 days ago</p>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="header.js"></script>
+    <script src="nav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/mentorreport.js"></script> -->
+</body>
+
+</html>

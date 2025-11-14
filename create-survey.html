@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Survey - Admin Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+        }
+
+        #sidebar-container {
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            background-color: #fff;
+            z-index: 1000;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        #header {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .content-wrapper {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto; /* Centers the content horizontally */
+}
+
+        /* Page Header Styles */
+        .page-header-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: #0066cc;
+        }
+
+        .page-title h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .page-title p {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        /* Section Styles */
+        .section-card {
+            background: #e8f4f8;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-select {
+            background: white;
+            cursor: pointer;
+        }
+
+        /* Question Item Styles */
+        .question-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .remove-question-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.25rem;
+            transition: color 0.2s;
+        }
+
+        .remove-question-btn:hover {
+            color: #a71d2a;
+        }
+
+        /* Option Styles */
+        .options-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-wrapper input {
+            flex: 1;
+        }
+
+        .option-input {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .remove-option-btn {
+            background: transparent;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 0.875rem;
+            padding: 0;
+            margin-left: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .remove-option-btn:hover {
+            color: #a71d2a;
+        }
+
+        /* Button Styles */
+        .btn-add-icon {
+            background: transparent;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            font-size: 1.5rem;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .btn-add-icon:hover {
+            background: rgba(0, 102, 204, 0.1);
+        }
+
+        .btn-add-small {
+            background: transparent;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-add-small:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background: #2c5f8d;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid #d0d0d0;
+            color: #6c757d;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #6c757d;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            #sidebar-container {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header-section">
+                <button class="back-btn" onclick="window.history.back()">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <div class="page-title">
+                    <h1>Create Survey</h1>
+                    <p>Create a new survey for mentors and mentees</p>
+                </div>
+            </div>
+
+            <!-- Basic Information Section -->
+            <div class="section-card">
+                <h2 class="section-title">Basic Information</h2>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        Survey Title <span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" id="surveyTitle" placeholder="e.g., Mentor Experience Feedback">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="surveyDescription" placeholder="Describe the purpose of this survey..."></textarea>
+                </div>
+
+               <!-- Modern Styled Dropdown -->
+<div class="mb-3" style="max-width:320px; position: relative;">
+  <label for="targetAudience" class="form-label">
+    Target Audience <span class="text-danger">*</span>
+  </label>
+
+  <div style="position: relative;">
+    <select id="targetAudience" class="form-select form-select-sm" aria-label="Target Audience"
+      style="appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 2rem;">
+      <option value="" selected disabled hidden>Select audience</option>
+      <option value="both">Both Mentors & Mentees</option>
+      <option value="mentors">Mentors Only</option>
+      <option value="mentees">Mentees Only</option>
+      <option value="all">All Users</option>
+    </select>
+
+    <!-- dropdown arrow -->
+    <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 0.8rem; color: #000;">
+      ▼
+    </span>
+  </div>
+</div>
+
+            </div>
+
+            <!-- Survey Questions Section -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2>Survey Questions</h2>
+                    <button class="btn-add-icon" id="addQuestionBtn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+                <!-- Questions Container -->
+                <div id="questionsContainer">
+                    <!-- Initial Question Template -->
+                    <div class="question-item">
+                        <div class="form-group">
+                            <label class="form-label">
+                                Question Text <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-input question-text" placeholder="Enter your question...">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="options-header">
+                                <label class="form-label" style="margin: 0;">Options</label>
+                                <button class="btn-add-small add-option-btn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="options-container">
+                                <input type="text" class="option-input" placeholder="Option 1" style="width: 100%; margin-bottom: 0.5rem;">
+                                <input type="text" class="option-input" placeholder="Option 2" style="width: 100%; margin-bottom: 0.5rem;">
+                                <input type="text" class="option-input" placeholder="Option 3" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="noQuestionsMsg">
+                    No questions added yet
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn-secondary" onclick="window.history.back()">
+                    Cancel
+                </button>
+                <button class="btn-primary" id="publishBtn">
+                    Publish Survey
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="header.js"></script>
+    <script src="nav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        let questionCount = 1;
+
+        // Add Question Button Handler
+        document.getElementById('addQuestionBtn').addEventListener('click', function() {
+            questionCount++;
+            const questionsContainer = document.getElementById('questionsContainer');
+            const noQuestionsMsg = document.getElementById('noQuestionsMsg');
+            noQuestionsMsg.style.display = 'none';
+
+            const questionHTML = `
+                <div class="question-item">
+                    <button class="remove-question-btn" onclick="removeQuestion(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="form-group">
+                        <label class="form-label">
+                            Question Text <span class="required">*</span>
+                        </label>
+                        <input type="text" class="form-input question-text" placeholder="Enter your question...">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="options-header">
+                            <label class="form-label" style="margin: 0;">Options</label>
+                            <button class="btn-add-small add-option-btn">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="options-container">
+                            <div class="option-wrapper">
+                                <input type="text" class="option-input" placeholder="Option 1">
+                            </div>
+                            <div class="option-wrapper">
+                                <input type="text" class="option-input" placeholder="Option 2">
+                            </div>
+                            <div class="option-wrapper">
+                                <input type="text" class="option-input" placeholder="Option 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            questionsContainer.insertAdjacentHTML('beforeend', questionHTML);
+            attachOptionListeners();
+        });
+
+        // Remove Question Handler
+        function removeQuestion(btn) {
+            btn.parentElement.remove();
+            checkQuestions();
+        }
+
+        // Add Option Listeners
+        function attachOptionListeners() {
+            document.querySelectorAll('.add-option-btn').forEach(btn => {
+                // Remove existing listeners by cloning
+                const newBtn = btn.cloneNode(true);
+                btn.replaceWith(newBtn);
+            });
+
+            document.querySelectorAll('.add-option-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const optionsContainer = this.closest('.question-item').querySelector('.options-container');
+                    const optionCount = optionsContainer.querySelectorAll('.option-wrapper').length + 1;
+                    
+                    const optionHTML = `
+                        <div class="option-wrapper">
+                            <input type="text" class="option-input" placeholder="Option ${optionCount}">
+                            <button class="remove-option-btn" onclick="this.parentElement.remove()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    optionsContainer.insertAdjacentHTML('beforeend', optionHTML);
+                });
+            });
+        }
+
+        // Check if Questions Exist
+        function checkQuestions() {
+            const questionsContainer = document.getElementById('questionsContainer');
+            const noQuestionsMsg = document.getElementById('noQuestionsMsg');
+            
+            if (questionsContainer.children.length === 0) {
+                noQuestionsMsg.style.display = 'block';
+            }
+        }
+
+        // Publish Survey Handler
+        document.getElementById('publishBtn').addEventListener('click', function() {
+            const surveyTitle = document.getElementById('surveyTitle').value;
+            const surveyDescription = document.getElementById('surveyDescription').value;
+            const targetAudience = document.getElementById('targetAudience').value;
+            
+            if (!surveyTitle.trim()) {
+                alert('Please enter a survey title');
+                return;
+            }
+
+            const questions = [];
+            document.querySelectorAll('.question-item').forEach((item, index) => {
+                const questionText = item.querySelector('.question-text').value;
+                const options = [];
+                
+                item.querySelectorAll('.option-input').forEach(optionInput => {
+                    if (optionInput.value.trim()) {
+                        options.push(optionInput.value.trim());
+                    }
+                });
+
+                if (questionText.trim()) {
+                    questions.push({
+                        question: questionText.trim(),
+                        options: options
+                    });
+                }
+            });
+
+            if (questions.length === 0) {
+                alert('Please add at least one question');
+                return;
+            }
+
+            const surveyData = {
+                title: surveyTitle.trim(),
+                description: surveyDescription.trim(),
+                targetAudience: targetAudience,
+                questions: questions
+            };
+
+            console.log('Survey Data:', surveyData);
+            alert('Survey published successfully!');
+            
+            // Here you would typically send the data to your backend
+            // Example: fetch('/api/surveys', { method: 'POST', body: JSON.stringify(surveyData) })
+        });
+
+        // Initialize Option Listeners
+        attachOptionListeners();
+    </script>
+</body>
+</html>

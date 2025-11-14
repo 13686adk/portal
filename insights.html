@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* insight of styles.css */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-color: white;
+        display: flex;
+    }
+
+    #sidebar-container {
+        width: 250px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        background-color: #fff;
+        z-index: 1000;
+    }
+
+    .main-content {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    #header {
+        background-color: #fff;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .content-wrapper {
+        padding: 2rem;
+        max-width: 1400px;
+    }
+
+    .page-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.25rem;
+    }
+
+    .page-header p {
+        color: #6c757d;
+        font-size: 0.875rem;
+    }
+
+    .tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 1px solid #e6f5ff;
+        margin-bottom: 2rem;
+    }
+
+    .tab {
+        padding: 0.75rem 1.5rem;
+        color: #6c757d;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+    }
+
+    .tab:hover {
+        color: #0066cc;
+        background-color: #f8f9fa;
+    }
+
+    .tab.active {
+        color: #0066cc;
+        border-bottom-color: #0066cc;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .metric-card {
+        background: #e6f5ff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    .metric-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .metric-title {
+        font-size: 0.875rem;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .metric-icon {
+        color: #0066cc;
+        font-size: 1rem;
+    }
+
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 0.25rem;
+    }
+
+    .metric-change {
+        font-size: 0.75rem;
+        color: #6c757d;
+    }
+
+    .metric-change.positive {
+        color: #28a745;
+    }
+
+    .chart-container {
+        background: #e6f5ff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .chart-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .chart-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+
+    canvas {
+        max-height: 300px;
+    }
+
+    .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .bottom-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .legend {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+    }
+
+    /* Survey Tab Styles */
+    .survey-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .survey-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-box {
+        background: #e6f5ff;
+        padding: 1.25rem 1.5rem;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-box h3 {
+        font-size: 0.875rem;
+        color: #6c757d;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .stat-box .value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        text-align: left;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-box .icon {
+        font-size: 1.5rem;
+        color: #0066cc;
+        align-self: flex-end;
+    }
+
+    /* Action + Search Area */
+    .survey-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .search-box {
+        position: relative;
+        flex: 1;
+    }
+
+    .search-box input {
+        width: 30%;
+        padding: 0.5rem 1rem 0.5rem 2.5rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 0.875rem;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background-color 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-filter {
+        background-color: white;
+        color: #6c757d;
+        border: 1px solid #e0e0e0;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-filter:hover {
+        background-color: #f8f9fa;
+        color: #1a1a1a;
+    }
+
+    /* Survey List */
+    .survey-list {
+        background: #e6f5ff;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .survey-item {
+        padding: 1.5rem;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        transition: background-color 0.2s;
+    }
+
+    .survey-item:hover {
+        background-color: #f1f9ff;
+    }
+
+    .survey-item:last-child {
+        border-bottom: none;
+    }
+
+    .survey-info h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+    }
+
+    .survey-info p {
+        font-size: 0.875rem;
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+    }
+
+    .survey-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.75rem;
+        color: #6c757d;
+    }
+
+    .survey-status {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status-active {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-closed {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .survey-actions-btn {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .icon-btn {
+        background: transparent;
+        border: none;
+        color: #6c757d;
+        cursor: pointer;
+        padding: 0.5rem;
+        font-size: 1rem;
+        transition: color 0.2s;
+    }
+
+    .icon-btn:hover {
+        color: #0066cc;
+    }
+</style>
+
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Insights</h1>
+                <p>Comprehensive platform metrics and performance data</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="analytics">Analytics</button>
+                <button class="tab" data-tab="survey">Survey</button>
+            </div>
+
+            <!-- Analytics Tab Content -->
+            <div id="analytics-content" class="tab-content active">
+                <!-- Metrics Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Total Users</span>
+                            <i class="fas fa-users metric-icon"></i>
+                        </div>
+                        <div class="metric-value" id="totalUsers">0</div>
+                        <div class="metric-change">+345 vs last month</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Active Sessions</span>
+                            <i class="fas fa-chart-line metric-icon"></i>
+                        </div>
+                        <div class="metric-value" id="activeSessions">0</div>
+                        <div class="metric-change">Average daily</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Course Completion</span>
+                            <i class="fas fa-graduation-cap metric-icon"></i>
+                        </div>
+                        <div class="metric-value" id="courseCompletion">0</div>
+                        <div class="metric-change">Average rate</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Platform Growth</span>
+                            <i class="fas fa-arrow-trend-up metric-icon"></i>
+                        </div>
+                        <div class="metric-value positive" id="platformGrowth">0</div>
+                        <div class="metric-change positive">YoY growth</div>
+                    </div>
+                </div>
+
+                <!-- User Growth Trend Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">User Growth Trend</div>
+                    </div>
+                    <canvas id="userGrowthChart"></canvas>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #7fb3d5;"></div>
+                            <span>Mentors</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #2c5f8d;"></div>
+                            <span>Mentee</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #1a3a52;"></div>
+                            <span>Users</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Grid -->
+                <div class="bottom-grid">
+                    <!-- Session Performance -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">Session Performance</div>
+                        </div>
+                        <canvas id="sessionPerformanceChart"></canvas>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #7fb3d5;"></div>
+                                <span>Completed</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #2c5f8d;"></div>
+                                <span>On Hold</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #1a3a52;"></div>
+                                <span>Flagged</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Engagement Levels -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">User Engagement Levels</div>
+                        </div>
+                        <canvas id="engagementChart"></canvas>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #5dade2;"></div>
+                                <span>Active</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #2874a6;"></div>
+                                <span>Inactive</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #1a5276;"></div>
+                                <span>Moderate</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #154360;"></div>
+                                <span>Very Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Courses Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Top Courses by Enrollment</div>
+                    </div>
+                    <canvas id="topCoursesChart"></canvas>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #b0b0b0;"></div>
+                            <span>Completions</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #1a5276;"></div>
+                            <span>Enrollments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Survey Tab Content -->
+            <div id="survey-content" class="tab-content">
+                <!-- Survey Stats -->
+                <div class="survey-stats d-flex flex-wrap gap-3">
+                    <div class="stat-box border rounded p-3 flex-fill shadow-sm">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="text-muted mb-2">Total Surveys</h6>
+                            <i class="fas fa-file-lines text-primary"></i>
+                        </div>
+                        <h3 class="fw-bold mb-2 text-start">3</h3>
+                    </div>
+
+                    <div class="stat-box border rounded p-3 flex-fill shadow-sm">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="text-muted mb-2">Active Surveys</h6>
+                            <i class="fas fa-eye  text-primary"></i>
+                        </div>
+                        <h3 class="fw-bold mb-2 text-start">2</h3>
+                    </div>
+
+                    <div class="stat-box border rounded p-3 flex-fill shadow-sm">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="text-muted mb-2">Total Responses</h6>
+                            <i class="fas fa-chart-simple text-primary"></i>
+                        </div>
+                        <h3 class="fw-bold mb-0 text-start">243</h3>
+                    </div>
+                </div>
+
+
+                <!-- Survey Actions -->
+                <div class="survey-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search surveys...">
+                    </div>
+                    <button class="btn-filter">
+                        <i class="fas fa-sliders"></i>
+                        Status: All
+                    </button>
+                    <a href="create-survey.html" class="btn btn-primary">
+  <i class="fas fa-plus"></i>
+  Create Survey
+</a>
+
+                </div>
+
+                <!-- Survey List -->
+                <div class="p-3 bg-white"> <!-- white page background -->
+                    <div class="d-flex flex-column gap-3">
+
+                        <!-- Survey Item 1 -->
+                        <div class="survey-item d-flex justify-content-between align-items-start p-3 rounded shadow-sm"
+                            style="background-color: #e6f5ff;">
+                            <div class="survey-info">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-semibold mb-0">Member Experience Feedback</h5>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="mb-2 text-muted small">Get the feedback on the mentoring experience</p>
+                                <div class="survey-meta d-flex flex-wrap gap-3 small text-secondary">
+                                    <span><strong>Target:</strong> Members</span>
+                                    <span><strong>Questions:</strong> 8</span>
+                                    <span><strong>Responses:</strong> 42</span>
+                                    <span><strong>Date:</strong> 2025-10-29</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 align-items-center">
+                                <button
+                                    class="btn btn-outline-primary btn-sm px-2 py-1 d-flex align-items-center gap-1 shadow-sm">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <a href="results.html"><small>Results</small></a>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm rounded-circle" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Survey Item 2 -->
+                        <div class="survey-item d-flex justify-content-between align-items-start p-3 rounded shadow-sm"
+                            style="background-color: #e6f5ff;">
+                            <div class="survey-info">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-semibold mb-0">Platform Usability Survey</h5>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <p class="mb-2 text-muted small">Help us improve the platform</p>
+                                <div class="survey-meta d-flex flex-wrap gap-3 small text-secondary">
+                                    <span><strong>Target:</strong> (All)</span>
+                                    <span><strong>Questions:</strong> 12</span>
+                                    <span><strong>Responses:</strong> 18</span>
+                                    <span><strong>Date:</strong> 2025-10-29</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 align-items-center">
+                                <button
+                                    class="btn btn-outline-primary btn-sm px-2 py-1 d-flex align-items-center gap-1 shadow-sm">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <small>Results</small>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm rounded-circle" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Survey Item 3 -->
+                        <div class="survey-item d-flex justify-content-between align-items-start p-3 rounded shadow-sm"
+                            style="background-color: #e6f5ff;">
+                            <div class="survey-info">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-semibold mb-0">Course Content Quality</h5>
+                                    <span class="badge bg-danger">Closed</span>
+                                </div>
+                                <p class="mb-2 text-muted small">Rate the quality of course materials</p>
+                                <div class="survey-meta d-flex flex-wrap gap-3 small text-secondary">
+                                    <span><strong>Target:</strong> Members</span>
+                                    <span><strong>Questions:</strong> 5</span>
+                                    <span><strong>Responses:</strong> 183</span>
+                                    <span><strong>Date:</strong> (N/A)</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 align-items-center">
+                                <button
+                                    class="btn btn-outline-primary btn-sm px-2 py-1 d-flex align-items-center gap-1 shadow-sm">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <small>Results</small>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm rounded-circle" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script src="header.js"></script>
+    <script src="nav.js"></script>
+    <script src="js/insight.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Show corresponding content
+                const tabName = tab.getAttribute('data-tab');
+                document.getElementById(tabName + '-content').classList.add('active');
+            });
+        });
+
+
+
+        
+       
+    </script>
+</body>
+
+</html>

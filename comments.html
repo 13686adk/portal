@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam's Design Community</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Content wrapper for your sidebar and header */
+        .page-content {
+            background-color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar for Forums */
+        .left-sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-right: 1px solid #dee2e6;
+            height: 100%;
+            float: left;
+        }
+
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .plus-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #dee2e6;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            color: #6c757d;
+        }
+
+        .forum-section {
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .forum-section:hover {
+            background-color: #f8f9fa;
+        }
+
+        .forum-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: #212529;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item-custom {
+            padding: 8px 20px;
+            display: block;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .nav-item-custom:hover {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+
+        /* Right Sidebar for Members */
+        .right-sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-left: 1px solid #dee2e6;
+            height: 100%;
+            float: right;
+            padding: 20px;
+        }
+
+        .members-section {
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .member-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .member-item {
+            padding: 6px 0;
+            font-size: 14px;
+            color: #212529;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .member-item:hover {
+            color: #0d6efd;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 250px;
+            margin-right: 250px;
+            background-color: #fff;
+            min-height: 100vh;
+        }
+
+        .content-header {
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .content-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+            margin: 0;
+        }
+
+        .search-section {
+            padding: 15px 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f8f9fa;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #0d6efd;
+            background-color: #fff;
+        }
+
+        .messages-container {
+            padding: 20px;
+        }
+
+        .message-item {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .message-info {
+            flex: 1;
+        }
+
+        .message-author {
+            font-weight: 600;
+            font-size: 14px;
+            color: #212529;
+            margin-right: 8px;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .message-content {
+            font-size: 14px;
+            color: #495057;
+            line-height: 1.6;
+            margin-left: 52px;
+            margin-bottom: 10px;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 16px;
+            margin-left: 52px;
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .message-actions i {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .message-actions i:hover {
+            color: #212529;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div id="header"></div>
+        <!-- This is the content section that will fit into your sidebar and header layout -->
+        <div class="page-content">
+
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <div class="sidebar-header">
+                    <span class="sidebar-title">Forums</span>
+                    <div class="plus-btn">+</div>
+                </div>
+
+                <div class="forum-section">
+                    <i class="bi bi-chevron-down"></i>
+                    <span class="forum-title">Sam's Design Community</span>
+                </div>
+
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-item-custom">#Announcement</a></li>
+                    <li><a href="general.html" class="nav-item-custom">#General</a></li>
+                    <li><a href="articles.html" class="nav-item-custom">#Articles</a></li>
+                    <li><a href="question.html" class="nav-item-custom">#Question/Answers</a></li>
+                    <li><a href="#" class="nav-item-custom">#Cruise</a></li>
+                    <li><a href="#" class="nav-item-custom">#Team Support</a></li>
+                </ul>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="right-sidebar">
+                <div class="members-section">
+                    <div class="section-header">
+                        <span>Mentors</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="members-section">
+                    <div class="section-header">
+                        <span>Sam's Design Community</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="member-list">
+                        <li class="member-item">Sam</li>
+                        <li class="member-item">Yusuf</li>
+                        <li class="member-item">Tunde</li>
+                        <li class="member-item">Chinedu</li>
+                        <li class="member-item">Finidi</li>
+                        <li class="member-item">Solomon</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="content-header">
+                    <h4 class="content-title">Sam's Design Community</h4>
+                </div>
+
+                <div class="search-section">
+                    <div class="search-wrapper">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search...">
+                    </div>
+                </div>
+
+                <div class="messages-container">
+                    <!-- Message 1 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="avatar">DG</div>
+                            <div class="message-info">
+                                <span class="message-author">David George</span>
+                                <span class="message-time">14/6/2025 02:44pm</span>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            Hello @everyone<br>
+                            This is to inform you that the error 401 has been resolved.<br>
+                            You can now submit without any restrictions.<br>
+                            <em style="color: #6c757d;">Sorry for the inconveniences caused.</em>
+                        </div>
+                        <div class="message-actions">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-share"></i>
+                        </div>
+                    </div>
+
+                    <!-- Message 2 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                FB</div>
+                            <div class="message-info">
+                                <span class="message-author">Freidi Britt</span>
+                                <span class="message-time">14/6/2025 03:46pm</span>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            Thank you for resolving that, we appreciate.
+                        </div>
+                        <div class="message-actions">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-share"></i>
+                        </div>
+                    </div>
+
+                    <!-- Message 3 -->
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">A
+                            </div>
+                            <div class="message-info">
+                                <span class="message-author">Admin</span>
+                                <span class="message-time">15/6/2025 04:47pm</span>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            Welcome Samuel @sam
+                        </div>
+                        <div class="message-actions">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-share"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="header.js"></script>
+        <script src="nav.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
